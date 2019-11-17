@@ -77,7 +77,7 @@ def upload_and_associate(fn):
 
     @retry(wait_exponential_multiplier=200, wait_exponential_max=10000, retry_on_exception=server_error)
     def associate():
-        subject.associate_media(media)
+        subject.associate_media(media, enable_wait_result=True, force_feedback=True)
         output_lock.acquire()
         print("%s %6d KB  %s" % (media, sz/1000, fn))
         output_lock.release()
